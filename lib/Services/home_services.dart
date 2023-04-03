@@ -7,16 +7,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/constants/links.dart';
 import '../locat.dart';
+import '../view/screens/home_page.dart';
 
 class HomeServices {
   int page = 1;
-  int limit = 19;
+  int limit = 20;
   List<ProductModel> products = [];
 
+
+
+
   Future<List> getProducts() async {
+
+
     Dio dio = Dio();
     try {
-      limit++;
       print('===============getProducts()==============');
       final response = await dio.get(
         '${AppLinks.productLink}?perpage=$limit&page=$page',
@@ -42,3 +47,4 @@ class HomeServices {
 
 
 final productsProvider = Provider<HomeServices>((ref) => HomeServices());
+final productsProviderlist = StateProvider((ref) => HomeServices() );
