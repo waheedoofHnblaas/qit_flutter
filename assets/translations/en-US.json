@@ -1,0 +1,21 @@
+
+
+
+
+{
+  "Login" : "Login",
+  "Logout" : "Logout",
+  "Register": "Register",
+  "Dashboard": "Dashboard",
+  "change_language": "Change Language",
+  "email": "email",
+  "username": "username",
+  "password": "password",
+  "c_password": "confirm password",
+  "login_account": "Have Account !! Login",
+  "have_account": "'Don\\'t Have Account !! Register'",
+  "Settings": "Settings",
+  "SYP": "Syp"
+
+
+}
