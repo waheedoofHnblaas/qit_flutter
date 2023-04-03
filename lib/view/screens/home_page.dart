@@ -20,29 +20,29 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productsDataProvider);
-
     bool loginState = ref.watch(loginProvider);
 
-    print('=============isLogin==${loginState}================');
+
+
     return Scaffold(
       drawer: HomeDrawer(ref),
       appBar: AppBar(
         title: const Text("Dashboard").tr(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: const FloatingButton(),
+
+
       body: data.when(
         skipError: true,
         data: (data) {
+
           List<ProductModel> products =
               data.map((e) => e as ProductModel).toList();
 
           ScrollController sc = ScrollController();
           sc.addListener(() {
             if (sc.position.maxScrollExtent == sc.offset) {
-
               print('==================getAgain=============');
-
             }
           });
 
@@ -61,24 +61,10 @@ class HomePage extends ConsumerWidget {
                             onTap: () {
                               Navigator.pushNamed(
                                   context, '${AppRoutes.productData}/$index');
-                              print('navigateTo');
+                              print('navigateTo productData');
                             },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15.0.w,
-                                vertical: 12.h,
-                              ),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    products[index].id.toString(),
-                                    style: TextStyle(fontSize: 22.sp),
-                                  ),
-                                  ProductCard(
-                                    data: products[index],
-                                  ),
-                                ],
-                              ),
+                            child: ProductCard(
+                              data: products[index],
                             ),
                           )
                         : Padding(
@@ -110,23 +96,35 @@ class HomePage extends ConsumerWidget {
             ),
           );
         },
-        error: (error, stackTrace) => Center(
-          child: Column(
-            children: [
-              Text(error.toString()),
-              IconButton(
-                  onPressed: () {
-                    ref.read(LoadingStateProvider.notifier).state = true;
-
-                    ref.refresh(productsDataProvider);
-                    ref.read(LoadingStateProvider.notifier).state = false;
-
-                  },
-                  icon: const Icon(Icons.refresh))
-            ],
-          ),
-        ),
+        error: (error, stackTrace) => ErrorWidget(error, ref),
         loading: () => const Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+  Widget ErrorWidget(Object error, WidgetRef ref) {
+    return Center(
+      child: Column(
+        children: [
+          Text(error.toString()),
+          IconButton(
+              onPressed: () {
+                ref.read(LoadingStateProvider.notifier).state = true;
+
+                ref.refresh(productsDataProvider);
+                ref.read(LoadingStateProvider.notifier).state = false;
+              },
+              icon: const Icon(Icons.refresh))
+        ],
       ),
     );
   }
