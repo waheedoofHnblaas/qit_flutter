@@ -1,6 +1,7 @@
 library main;
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:qit_flutter/Models/productModel/productModel.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +40,7 @@ class HomeServices {
         throw Exception('Server Access Error');
       }
     } catch (e) {
-      throw Exception('No Internet Connection');
+      throw Exception('No Internet Connection'.tr);
     }
   }
 }

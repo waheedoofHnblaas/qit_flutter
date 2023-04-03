@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qit_flutter/Providers/register_provider.dart';
-
 import '../../Providers/loadinf_provider.dart';
 import '../../core/constants/appRoutes.dart';
 import '../../core/function/validinput.dart';
